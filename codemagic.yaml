@@ -1,0 +1,19 @@
+workflows:
+  android-build:
+    name: Android Debug Build
+    max_build_duration: 30
+    environment:
+      java: 17
+      android:
+        image: latest
+    scripts:
+      - name: Clean project
+        script: ./gradlew clean
+      - name: Build APK
+        script: ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/**/*.apk
+    publishing:
+      email:
+        recipients:
+          - $CM_EMAIL
